@@ -11,56 +11,6 @@ const Home: NextPage = () => {
     <>
       <WeOfferBar />
       <Navbar />
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
-      <h1>DAS</h1>
     </>
   );
 };

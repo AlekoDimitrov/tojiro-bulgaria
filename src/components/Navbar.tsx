@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "@fontsource/joan";
+import "@fontsource/roboto-condensed";
 import { Flex, Text, chakra } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
@@ -8,7 +9,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { motion, isValidMotionProp } from "framer-motion";
 
 const Navbar = () => {
-  const [navShadow, setNavShadow] = useState("0px -20px 15px 3px #000000");
+  const [navShadow, setNavShadow] = useState("");
   const listenToScroll = () => {
     window.scrollY > 30
       ? setNavShadow("0px -14px 20px 0px #000000")
@@ -32,19 +33,23 @@ const Navbar = () => {
 
   return (
     <NavContainer
+      h={"100px"}
       display={"flex"}
       position={"sticky"}
       top={"0px"}
-      w={"100vw"}
       alignItems={"center"}
       justifyContent={"space-between"}
       backgroundColor={"#fff"}
-      padding={("0", "10px")}
+      padding={["0 10px", "0 10px", "0 40px", "0 80px"]}
       animate={{
         boxShadow: navShadow,
       }}
     >
-      <Flex w={"72px"} justify={"space-between"}>
+      <Flex
+        w={"72px"}
+        justify={"space-between"}
+        display={["flex", "flex", "flex", "none"]}
+      >
         <Text fontSize={"1.3rem"} color={"black"}>
           <FiMenu />
         </Text>
@@ -52,9 +57,26 @@ const Navbar = () => {
           <FiSearch />
         </Text>
       </Flex>
-      <Text fontSize={"3xl"} color={"black"} fontFamily={"'Joan', 'serif'"}>
+      <Text
+        fontSize={["3xl", "3xl", "3xl", "4xl"]}
+        fontFamily={"'Joan', 'serif'"}
+      >
         TOJIRO
       </Text>
+      <Flex
+        align={"center"}
+        justify={"space-between"}
+        w={"55%"}
+        fontFamily={"'roboto-condensed', 'serif'"}
+        fontSize={"0.8rem"}
+        color={"#000"}
+        display={["none", "none", "none", "flex"]}
+      >
+        <Text>ЯПОНСКИ НОЖОВЕ</Text>
+        <Text>АКСЕСОАРИ</Text>
+        <Text>УСЛУГИ</Text>
+        <Text>КОНТАКТИ </Text>
+      </Flex>
       <Flex w={"72px"} justify={"space-between"}>
         <Text fontSize={"1.3rem"} color={"black"}>
           <FiUser />
