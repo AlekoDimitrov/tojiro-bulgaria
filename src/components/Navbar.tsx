@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "@fontsource/joan";
-import "@fontsource/roboto-condensed";
+
 import { Flex, Text, chakra } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
@@ -33,7 +32,7 @@ const Navbar = () => {
 
   return (
     <NavContainer
-      h={"100px"}
+      h={"80px"}
       display={"flex"}
       position={"sticky"}
       top={"0px"}
@@ -67,10 +66,11 @@ const Navbar = () => {
         align={"center"}
         justify={"space-between"}
         w={"55%"}
-        fontFamily={"'roboto-condensed', 'serif'"}
-        fontSize={"0.8rem"}
+        fontFamily={"'montserrat', 'serif'"}
+        fontSize={"0.85rem"}
         color={"#000"}
         display={["none", "none", "none", "flex"]}
+        fontWeight={"700"}
       >
         <Text>ЯПОНСКИ НОЖОВЕ</Text>
         <Text>АКСЕСОАРИ</Text>
