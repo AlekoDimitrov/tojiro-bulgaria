@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Carousel from "../components/Carousel";
+import Carousel from "../components/Carousel/Carousel";
 import Navbar from "../components/Navbar";
 import WeOfferBar from "../components/WeOfferBar";
 import "@fontsource/joan";

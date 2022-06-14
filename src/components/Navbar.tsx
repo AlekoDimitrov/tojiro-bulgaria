@@ -68,7 +68,7 @@ const Navbar = () => {
         w={"55%"}
         fontFamily={"'montserrat', 'serif'"}
         fontSize={"0.85rem"}
-        color={"#000"}
+        color={"#0d0d0d#000000"}
         display={["none", "none", "none", "flex"]}
         fontWeight={"700"}
       >
