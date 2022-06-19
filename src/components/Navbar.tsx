@@ -40,6 +40,7 @@ const Navbar = () => {
       justifyContent={"space-between"}
       backgroundColor={"#fff"}
       padding={["0 10px", "0 10px", "0 40px", "0 80px"]}
+      zIndex={2}
       animate={{
         boxShadow: navShadow,
       }}

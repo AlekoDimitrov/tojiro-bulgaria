@@ -11,6 +11,10 @@ const Home: NextPage = () => {
       <WeOfferBar />
       <Navbar />
       <Carousel />
+      {/* <Navbar />
+      <Navbar />
+      <Navbar />
+      <Navbar /> */}
     </>
   );
 };
