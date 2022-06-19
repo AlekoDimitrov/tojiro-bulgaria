@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Button, ButtonGroup } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import images from "./carouselImages";
 import { motion, isValidMotionProp } from "framer-motion";
@@ -12,6 +12,7 @@ const InnerCarousel = chakra(motion.div, {
 
 const Carousel = () => {
   const innerCarousel = useRef(null);
+  const indicators = useRef(null);
 
   const [slide, setSlide] = useState(0);
   const [leftButton, setLeftButton] = useState({
@@ -25,7 +26,7 @@ const Carousel = () => {
     pointerEvents: "all",
   });
 
-  const toggleButton = (buttonDirection) => {
+  const toggleButton = (buttonDirection: any) => {
     if (buttonDirection === "left") {
       setLeftButton({
         background: "rgba(255, 255, 255, .5)",
@@ -39,8 +40,42 @@ const Carousel = () => {
         pointerEvents: "none",
       });
     } else {
-      setRightButton({ background: "rgb(255, 255, 255)", cursor: "pointer" });
-      setLeftButton({ background: "rgb(255, 255, 255)", cursor: "pointer" });
+      setRightButton({
+        background: "rgb(255, 255, 255)",
+        cursor: "pointer",
+        pointerEvents: "all",
+      });
+      setLeftButton({
+        background: "rgb(255, 255, 255)",
+        cursor: "pointer",
+        pointerEvents: "all",
+      });
+    }
+  };
+
+  const updateCarousel = (
+    currentChild,
+    targetChild,
+    currentIndicator,
+    targetIndicator
+  ) => {
+    // reassign "current" to target
+    currentChild.removeAttribute("id");
+    targetChild.id = "current";
+
+    // move to next slide
+    setSlide(parseInt(-targetChild.offsetLeft));
+    toggleButton("reset");
+
+    // move to target indicator
+    currentIndicator.removeAttribute("id");
+    targetIndicator.id = "current";
+
+    // if on first/last slide, disable left/right button
+    if (targetChild === innerCarousel.current.firstChild) {
+      toggleButton("left");
+    } else if (targetChild === innerCarousel.current.lastChild) {
+      toggleButton("right");
     }
   };
   return (
@@ -71,18 +106,16 @@ const Carousel = () => {
               const currentChild =
                 innerCarousel.current.querySelector("#current");
               const prevChild = currentChild.previousSibling;
+              const currentIndicator =
+                indicators.current.querySelector("#current");
+              const prevIndicator = currentIndicator.previousSibling;
 
-              // reassign current
-              currentChild.removeAttribute("id");
-              prevChild.id = "current";
-              // move to next slide
-              setSlide(parseInt(-prevChild.offsetLeft));
-              toggleButton("reset");
-              // at last child, disable left button
-              if (prevChild === innerCarousel.current.firstChild) {
-                toggleButton("left");
-              } else {
-              }
+              updateCarousel(
+                currentChild,
+                prevChild,
+                currentIndicator,
+                prevIndicator
+              );
             }}
           >
             <MdOutlineKeyboardArrowLeft size={32} />
@@ -97,17 +130,16 @@ const Carousel = () => {
               const currentChild =
                 innerCarousel.current.querySelector("#current");
               const nextChild = currentChild.nextSibling;
+              const currentIndicator =
+                indicators.current.querySelector("#current");
+              const nextIndicator = currentIndicator.nextSibling;
 
-              // reassign current
-              currentChild.removeAttribute("id");
-              nextChild.id = "current";
-              // move to next slide
-              setSlide(parseInt(-nextChild.offsetLeft));
-              toggleButton("reset");
-              // at last child, disable right button
-              if (nextChild === innerCarousel.current.lastChild) {
-                toggleButton("right");
-              }
+              updateCarousel(
+                currentChild,
+                nextChild,
+                currentIndicator,
+                nextIndicator
+              );
             }}
           >
             <MdOutlineKeyboardArrowRight size={32} />
@@ -137,6 +169,37 @@ const Carousel = () => {
             );
           })}
         </InnerCarousel>
+        <Flex justify={"center"} mt={"8px"}>
+          <ButtonGroup ref={indicators} gap={1} cursor={"default"}>
+            {images.map((image, key) => {
+              return (
+                <Button
+                  h={2}
+                  w={"1px"}
+                  key={key}
+                  // set id on first button as current and id as key for identification
+                  id={`${key === 0 ? "current" : ""}`}
+                  className={key + 1}
+                  onClick={() => {
+                    const currentChild =
+                      innerCarousel.current.querySelector("#current");
+                    const targetChild = innerCarousel.current.childNodes[key];
+                    const currentIndicator =
+                      indicators.current.querySelector("#current");
+                    const targetIndicator = indicators.current.childNodes[key];
+
+                    updateCarousel(
+                      currentChild,
+                      targetChild,
+                      currentIndicator,
+                      targetIndicator
+                    );
+                  }}
+                ></Button>
+              );
+            })}
+          </ButtonGroup>
+        </Flex>
       </Box>
     </Flex>
   );
