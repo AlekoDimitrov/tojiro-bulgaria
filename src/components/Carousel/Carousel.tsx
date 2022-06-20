@@ -64,7 +64,11 @@ const Carousel = () => {
     targetChild.id = "current";
 
     // move to next slide
-    setSlide(parseInt(-targetChild.offsetLeft));
+    setSlide(
+      slide === parseInt(-targetChild.offsetLeft)
+        ? parseInt(-targetChild.offsetLeft) - 0.00001
+        : parseInt(-targetChild.offsetLeft)
+    );
     toggleButton("reset");
 
     // move to target indicator
@@ -78,6 +82,11 @@ const Carousel = () => {
       toggleButton("right");
     }
   };
+
+  let startDrag = null;
+  let endDrag = null;
+  let startPosition = null;
+  let endPosition = null;
   return (
     <Flex w={"100vw"} justify={"center"} mt={["", "", "", "50px"]}>
       <Box
@@ -150,6 +159,54 @@ const Carousel = () => {
           display={"flex"}
           w={"fit-content"}
           animate={{ x: slide }}
+          drag={"x"}
+          // dragConstraints={{ left: 0 }}
+          onDragStart={() => {
+            startDrag = Date.now();
+            startPosition = parseInt(
+              innerCarousel.current.style.transform.split(/[()px]+/)[1]
+            );
+          }}
+          onDragEnd={() => {
+            endDrag = Date.now() - startDrag;
+            endPosition =
+              parseInt(
+                innerCarousel.current.style.transform.split(/[()px]+/)[1]
+              ) - startPosition;
+            const currentChild =
+              innerCarousel.current.querySelector("#current");
+            const currentIndicator =
+              indicators.current.querySelector("#current");
+
+            let targetIndicator = currentIndicator.nextSibling;
+            let targetChild = currentChild.nextSibling;
+
+            if (
+              ((endDrag < 100 && endPosition < 0) ||
+                endPosition < -currentChild.clientWidth / 6) &&
+              currentChild.nextSibling !== null
+            ) {
+              targetChild = currentChild.nextSibling;
+              targetIndicator = currentIndicator.nextSibling;
+            } else if (
+              ((endDrag < 100 && endPosition > 0) ||
+                endPosition > currentChild.clientWidth / 6) &&
+              currentChild.previousSibling !== null
+            ) {
+              targetChild = currentChild.previousSibling;
+              targetIndicator = currentIndicator.previousSibling;
+            } else {
+              targetChild = currentChild;
+              targetIndicator = currentIndicator;
+            }
+
+            updateCarousel(
+              currentChild,
+              targetChild,
+              currentIndicator,
+              targetIndicator
+            );
+          }}
         >
           {images.map((image, key) => {
             return (
@@ -169,13 +226,13 @@ const Carousel = () => {
             );
           })}
         </InnerCarousel>
-        <Flex justify={"center"} mt={"8px"}>
+        <Flex justify={"center"} mt={"10px"}>
           <ButtonGroup ref={indicators} gap={1} cursor={"default"}>
             {images.map((image, key) => {
               return (
                 <Button
-                  h={2}
-                  w={"1px"}
+                  h={1}
+                  size={"xs"}
                   key={key}
                   // set id on first button as current and id as key for identification
                   id={`${key === 0 ? "current" : ""}`}
