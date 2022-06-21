@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { Flex, Text, chakra } from "@chakra-ui/react";
 import { FiMenu } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
@@ -39,7 +38,7 @@ const Navbar = () => {
       alignItems={"center"}
       justifyContent={"space-between"}
       backgroundColor={"#fff"}
-      padding={["0 10px", "0 10px", "0 40px", "0 80px"]}
+      padding={["0 10px", "0 20px", "0 40px", "0 80px"]}
       zIndex={2}
       animate={{
         boxShadow: navShadow,
@@ -64,6 +63,7 @@ const Navbar = () => {
         TOJIRO
       </Text>
       <Flex
+        className="text"
         align={"center"}
         justify={"space-between"}
         w={"55%"}

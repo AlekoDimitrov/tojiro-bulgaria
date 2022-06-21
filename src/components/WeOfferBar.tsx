@@ -9,7 +9,7 @@ const WeOfferBar = () => {
       backgroundColor={"#3A3D4E"}
       h={"30px"}
     >
-      <Text fontSize={"0.7rem"} color={"#ffff"}>
+      <Text fontSize={"0.7rem"} color={"#ffff"} fontFamily={"montserrat"}>
         БЕЗПЛАТНА ДОСТАВКА В ЦЯЛАТА СТРАНА
       </Text>
     </Flex>

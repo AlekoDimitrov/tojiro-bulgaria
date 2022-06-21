@@ -54,10 +54,10 @@ const Carousel = () => {
   };
 
   const updateCarousel = (
-    currentChild,
-    targetChild,
-    currentIndicator,
-    targetIndicator
+    currentChild: any,
+    targetChild: any,
+    currentIndicator: any,
+    targetIndicator: any
   ) => {
     // reassign "current" to target
     currentChild.removeAttribute("id");
@@ -65,9 +65,9 @@ const Carousel = () => {
 
     // move to next slide
     setSlide(
-      slide === parseInt(-targetChild.offsetLeft)
-        ? parseInt(-targetChild.offsetLeft) - 0.00001
-        : parseInt(-targetChild.offsetLeft)
+      slide === -targetChild.offsetLeft
+        ? -targetChild.offsetLeft - 0.00001
+        : -targetChild.offsetLeft
     );
     toggleButton("reset");
 
@@ -76,19 +76,19 @@ const Carousel = () => {
     targetIndicator.id = "current";
 
     // if on first/last slide, disable left/right button
-    if (targetChild === innerCarousel.current.firstChild) {
+    if (targetChild === innerCarousel.current?.["firstChild"]) {
       toggleButton("left");
-    } else if (targetChild === innerCarousel.current.lastChild) {
+    } else if (targetChild === innerCarousel.current?.["lastChild"]) {
       toggleButton("right");
     }
   };
 
-  let startDrag = null;
-  let endDrag = null;
-  let startPosition = null;
-  let endPosition = null;
+  let startDrag: any = null;
+  let startPosition: any = null;
+  // let endDrag = null;
+  // let endPosition = null;
   return (
-    <Flex w={"100vw"} justify={"center"} mt={["", "", "", "50px"]}>
+    <Flex w={"100%"} justify={"center"} mt={["", "", "", "10px"]}>
       <Box
         w={["90%", "90%", "90%", "90%", "80%", "60%"]}
         overflowX={"hidden"}
@@ -99,7 +99,7 @@ const Carousel = () => {
           justify={"space-between"}
           position={"sticky"}
           w={"100%"}
-          top={"52%"}
+          top={"51%"}
           left={0}
           right={0}
           display={["none", "none", "flex", "flex"]}
@@ -108,12 +108,12 @@ const Carousel = () => {
           <Box
             background={leftButton.background}
             cursor={leftButton.cursor}
-            pointerEvents={leftButton.pointerEvents}
+            pointerEvents={leftButton.pointerEvents === "none" ? "none" : "all"}
             borderRadius={"50%"}
             ml={"10px"}
             onClick={() => {
               const currentChild =
-                innerCarousel.current.querySelector("#current");
+                innerCarousel.current?.querySelector("#current");
               const prevChild = currentChild.previousSibling;
               const currentIndicator =
                 indicators.current.querySelector("#current");
@@ -127,12 +127,14 @@ const Carousel = () => {
               );
             }}
           >
-            <MdOutlineKeyboardArrowLeft size={32} />
+            <MdOutlineKeyboardArrowLeft size={28} />
           </Box>
           <Box
             background={rightButton.background}
             cursor={rightButton.cursor}
-            pointerEvents={rightButton.pointerEvents}
+            pointerEvents={
+              rightButton.pointerEvents === "none" ? "none" : "all"
+            }
             borderRadius={"50%"}
             mr={"10px"}
             onClick={() => {
@@ -151,7 +153,7 @@ const Carousel = () => {
               );
             }}
           >
-            <MdOutlineKeyboardArrowRight size={32} />
+            <MdOutlineKeyboardArrowRight size={28} />
           </Box>
         </Flex>
         <InnerCarousel
@@ -160,7 +162,6 @@ const Carousel = () => {
           w={"fit-content"}
           animate={{ x: slide }}
           drag={"x"}
-          // dragConstraints={{ left: 0 }}
           onDragStart={() => {
             startDrag = Date.now();
             startPosition = parseInt(
@@ -168,8 +169,8 @@ const Carousel = () => {
             );
           }}
           onDragEnd={() => {
-            endDrag = Date.now() - startDrag;
-            endPosition =
+            const endDrag = Date.now() - startDrag;
+            const endPosition =
               parseInt(
                 innerCarousel.current.style.transform.split(/[()px]+/)[1]
               ) - startPosition;
@@ -226,7 +227,7 @@ const Carousel = () => {
             );
           })}
         </InnerCarousel>
-        <Flex justify={"center"} mt={"10px"}>
+        <Flex justify={"center"} mt={"18px"}>
           <ButtonGroup ref={indicators} gap={1} cursor={"default"}>
             {images.map((image, key) => {
               return (
