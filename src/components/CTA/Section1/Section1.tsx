@@ -1,4 +1,12 @@
-import { Box, Flex, Grid, GridItem, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Grid,
+  GridItem,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import React from "react";
 import Images from "./Images";
 
@@ -22,7 +30,7 @@ const Section1 = () => {
       </Box>
       <Grid
         w={["90%", "90%", "90%", "90%", "80%", "60%"]}
-        h={"fit-content"}
+        alignItems={"center"}
         templateColumns={[
           "repeat(2, 1fr)",
           "repeat(2, 1fr)",
@@ -38,18 +46,20 @@ const Section1 = () => {
         {Images.map((img, key) => {
           if (img === Images[Images.length - 1]) {
             return (
-              <GridItem colSpan={[2, 2, 1, 4]} key={key}>
-                <Image
-                  src={img.src}
-                  display={"inline-grid"}
-                  h={["50px", "70px", "70px", "70px"]}
-                />
-                <Text>{img.text}</Text>
-              </GridItem>
+              <a href="">
+                <GridItem colSpan={[2, 2, 1, 4]} key={key}>
+                  <Image
+                    src={img.src}
+                    display={"inline-grid"}
+                    h={["50px", "70px", "70px", "70px"]}
+                  />
+                  <Text>{img.text}</Text>
+                </GridItem>
+              </a>
             );
           } else {
             return (
-              <GridItem key={key}>
+              <GridItem key={key} h={"fit-content"}>
                 <Image src={img.src} />
                 <Text mt={"15px"}>{img.text}</Text>
               </GridItem>
@@ -57,6 +67,7 @@ const Section1 = () => {
           }
         })}
       </Grid>
+      <Divider mt={"50px"} w={["90%", "90%", "90%", "90%", "80%", "60%"]} />
     </Flex>
   );
 };
