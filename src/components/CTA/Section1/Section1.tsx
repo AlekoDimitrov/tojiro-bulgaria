@@ -22,7 +22,7 @@ const Section1 = () => {
       </Box>
       <Grid
         w={["90%", "90%", "90%", "90%", "80%", "60%"]}
-        h={"200px"}
+        h={"fit-content"}
         templateColumns={[
           "repeat(2, 1fr)",
           "repeat(2, 1fr)",
