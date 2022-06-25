@@ -85,8 +85,6 @@ const Carousel = () => {
 
   let startDrag: any = null;
   let startPosition: any = null;
-  // let endDrag = null;
-  // let endPosition = null;
   return (
     <Flex w={"100%"} justify={"center"} mt={["", "", "", "10px"]}>
       <Box

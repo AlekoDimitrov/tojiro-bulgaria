@@ -7,6 +7,7 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
 import Images from "./Images";
 
@@ -46,8 +47,8 @@ const Section1 = () => {
         {Images.map((img, key) => {
           if (img === Images[Images.length - 1]) {
             return (
-              <a href="">
-                <GridItem colSpan={[2, 2, 1, 4]} key={key}>
+              <Link href="" key={key}>
+                <GridItem colSpan={[2, 2, 1, 4]}>
                   <Image
                     src={img.src}
                     display={"inline-grid"}
@@ -55,7 +56,7 @@ const Section1 = () => {
                   />
                   <Text>{img.text}</Text>
                 </GridItem>
-              </a>
+              </Link>
             );
           } else {
             return (
